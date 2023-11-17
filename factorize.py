@@ -69,24 +69,6 @@ def synthesize(num):
             less = 0
     return i
 
-def tokenize(num):
-    tokens = []
-    c = 0
-    token = ""
-    l = len(num)
-    while c < l:
-        if len(token) > 0 and token[-1] == num[c]:
-            token = token + num[c]
-        else:
-            if len(token) > 0:
-                tokens.append(token)
-                token = ""
-            token = num[c]
-        c = c + 1
-    if len(token) > 0:
-        tokens.append(token)
-    return tokens
-
 def analyze(pivot):
     f = open("./pi.txt","r")
     g = open("./e.txt","r")
@@ -116,8 +98,7 @@ def analyze(pivot):
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
-    tokens = tokenize(num)
-    pivot = synthesize(tokens)
+    pivot = synthesize(num)
     print(pivot)
     print("")
     analyze(pivot)
