@@ -1,4 +1,4 @@
-﻿#!/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+﻿#!/usr/bin/python3
 import sys
 from zeros import zeros
 from mpmath import mp
@@ -39,20 +39,18 @@ def _synthesize_(p, num, i, zero_index):
         pivot = bwd
     for j in range(zero_index, zero_index + BLK):
         zero = get_zero(j)
-        for k in range(0, pivot[j - zero_index] + 1):
+        for k in range(0, pivot[j - zero_index]):
             if zero[k] == nn:
                 count = count + 1
     return count
 
 
 def factorize(num):
-    global BLK
     l = len(num)
     sum11 = 0
     sum12 = 0
     zero_index = 1
     i = 0
-    c = 0
     sum1l = []
     sum2l = []
     while True:
@@ -69,16 +67,14 @@ def factorize(num):
         if sum1 in zeros:
             sum1l.append([i,sum11])
             sum2l.append([i,sum12])
-            print([i, sum1, sum1l, sum2l])
-            if i % l == 0:
-                c = c + 1
-            if c == l:
-                break
+            y= input([i, sum1, sum1l, sum2l])
             sum1l = []
             sum2l = []
             sum1 = 0
             sum11 = 0
             sum12 = 0
+            if y == "0":
+                break
     return zero_index - 1
 
 
