@@ -1,0 +1,1 @@
+python3 ./factorize.py `cat testcases/latest.txt` > manindra_out.txt

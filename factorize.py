@@ -1,6 +1,4 @@
-﻿#!/usr/local/bin/python3
-
-
+﻿#!/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
 import sys
 from zeros import zeros
 from mpmath import mp
@@ -72,7 +70,8 @@ def factorize(num):
             sum1l.append([i,sum11])
             sum2l.append([i,sum12])
             print([i, sum1, sum1l, sum2l])
-            c = c + 1
+            if i % l == 0:
+                c = c + 1
             if c == l:
                 break
             sum1l = []
