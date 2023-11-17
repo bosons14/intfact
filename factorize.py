@@ -31,7 +31,7 @@ def _synthesize_(p, num, i, zero_index):
     for j in range(zero_index, zero_index + 8):
         zero = get_zero(j)
         for k in range(0, 8):
-            if zero[k] == nn:
+            if zero[k:k + len(nn)] == nn:
                 count = count + 1
     return count
 
