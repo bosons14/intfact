@@ -42,14 +42,28 @@ def factorize(num):
     sum12 = 0
     zero_index = 1
     i = 0
+    less = 0
+    greater = 0
+    equal = 0
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
+        if l1 == l2:
+            equal = equal + 1
+        elif l1 < l2:
+            less = less + 1
+        elif l1 > l2:
+            greater = greater + 1
         zero_index = zero_index + 8
         i = i + 1
-        y= input([i, l1, l2])
-        if y == "0":
-            break
+        print([i, l1, l2])
+        if l1 == l2 and l1 == 0:
+            y= input([i, l1, l2, equal, greater, lesser])
+            equal = 0
+            greater = 0
+            lesser = 0
+            if y == "0":
+                break
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
