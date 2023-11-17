@@ -1,13 +1,7 @@
 ﻿#!/usr/bin/python3
 import sys
-from zeros import zeros
 from mpmath import mp
 from mpmath import zetazero
-
-
-fwd=[8,4,2,1]
-bwd=[1,2,4,8]
-
 
 PREC=32
 _zeros_ = dict([])
@@ -26,20 +20,17 @@ def get_zero(index):
         return zero
 
 
-BLK = 4
 def _synthesize_(p, num, i, zero_index):
     nn = ""
     pivot = ""
     count = 0
     if p == 0:
         nn = num[i]
-        pivot = fwd
     else:
         nn = num[::-1][i]
-        pivot = bwd
-    for j in range(zero_index, zero_index + BLK):
+    for j in range(zero_index, zero_index + 8):
         zero = get_zero(j)
-        for k in range(0, pivot[j - zero_index]):
+        for k in range(0, 8):
             if zero[k] == nn:
                 count = count + 1
     return count
@@ -51,32 +42,14 @@ def factorize(num):
     sum12 = 0
     zero_index = 1
     i = 0
-    sum1l = []
-    sum2l = []
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        sum11 = sum11 + l1
-        sum12 = sum12 + l2
-        sum1 = sum11 + sum12
-        zero_index = zero_index + BLK
+        zero_index = zero_index + 8
         i = i + 1
-        if l1 == 0 and l2 == 0:
-            sum1l.append([i,sum11])
-            sum2l.append([i,sum12])
-        if sum1 in zeros:
-            sum1l.append([i,sum11])
-            sum2l.append([i,sum12])
-            y= input([i, sum1, sum1l, sum2l])
-            sum1l = []
-            sum2l = []
-            sum1 = 0
-            sum11 = 0
-            sum12 = 0
-            if y == "0":
-                break
-    return zero_index - 1
-
+        y= input([i, l1, l2])
+        if y == "0":
+            break
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
