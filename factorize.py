@@ -36,7 +36,7 @@ def _synthesize_(p, num, i, zero_index):
     return count
 
 
-def factorize(num):
+def synthesize(num):
     l = len(num)
     sum11 = 0
     sum12 = 0
@@ -45,25 +45,29 @@ def factorize(num):
     less = 0
     greater = 0
     equal = 0
+    c = 0
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        if l1 == l2 and l1 > 0:
+        if l1 == l2:
             equal = equal + 1
         elif l1 < l2:
             less = less + 1
         elif l1 > l2:
             greater = greater + 1
-        zero_index = zero_index + 8
+        zero_index = zero_index + 4
         i = i + 1
         print([i, l1, l2])
-        if l1 == l2 and l1 == 0:
-            y= input([i, l1, l2, equal, greater, less])
+        if l1 == l2 and l1 == 8:
+            print([i, l1, l2, equal, greater, less])
+            if greater == less:
+                c = c + 1
+            if c == l:
+                break
             equal = 0
             greater = 0
-            lesser = 0
-            if y == "0":
-                break
+            less = 0
+    return i
 
 def tokenize(num):
     tokens = []
@@ -83,7 +87,37 @@ def tokenize(num):
         tokens.append(token)
     return tokens
 
+def analyze(pivot):
+    f = open("./pi.txt","r")
+    g = open("./e.txt","r")
+    f.read(2)
+    g.read(2)
+    pp = f.read(pivot)
+    ee = g.read(pivot)[::-1]
+    equal = 0
+    greater = 0
+    lesser = 0
+    for k in list(zip(pp, ee)):
+        print(k[0], k[1])
+        if int(k[0]) < int(k[1]):
+            lesser = lesser + 1
+        elif int(k[0]) > int(k[1]):
+            greater = greater + 1
+        elif int(k[0]) == int(k[1]) and k[0] != "0":
+            equal = equal + 1
+        if k[0] == k[1] and k[0] == "0":
+            input([equal, greater, lesser])
+            equal = 0
+            greater = 0
+            lesser = 0
+    input([equal, greater, lesser])
+    f.close()
+    g.close()
+
 if __name__ == "__main__":
     num = str(sys.argv[1])
     tokens = tokenize(num)
-    factorize(tokens)
+    pivot = synthesize(tokens)
+    print(pivot)
+    print("")
+    analyze(pivot)
