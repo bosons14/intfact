@@ -48,7 +48,7 @@ def factorize(num):
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        if l1 == l2 and (l1 % 10) > 0:
+        if l1 == l2 and l1 > 0:
             equal = equal + 1
         elif l1 < l2:
             less = less + 1
@@ -57,7 +57,7 @@ def factorize(num):
         zero_index = zero_index + 8
         i = i + 1
         print([i, l1, l2])
-        if l1 == l2 and l1 % 10 == 0:
+        if l1 == l2 and l1 == 0:
             y= input([i, l1, l2, equal, greater, less])
             equal = 0
             greater = 0
