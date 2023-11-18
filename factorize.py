@@ -20,7 +20,7 @@ def get_zero(index):
         return zero
 
 
-def _synthesize_(p, num, i, zero_index):
+def _synthesize_(p, num, i, zero):
     nn = ""
     pivot = ""
     count = 0
@@ -28,7 +28,6 @@ def _synthesize_(p, num, i, zero_index):
         nn = num[i]
     else:
         nn = num[::-1][i]
-    zero = get_zero(zero_index)
     for k in range(0, 8):
        if zero[k] == nn:
             count = count + 1
@@ -41,7 +40,7 @@ def get_interstitial_digits(zero, l1, l2):
         l2 = t
     delta = l2 - l1
     if delta > 1:
-        return zero[l1:l2]
+        return zero[l1:l2-1]
     else:
         return None
 
@@ -54,8 +53,9 @@ def synthesize(num):
     g = open("./e.txt","r")
     g.read(2)
     while True:
-        l1 = _synthesize_(0, num, i % l, zero_index)
-        l2 = _synthesize_(1, num, i % l, zero_index)
+        zero = get_zero(zero_index)
+        l1 = _synthesize_(0, num, i % l, zero)
+        l2 = _synthesize_(1, num, i % l, zero)
         pp = f.read(1)
         ee = g.read(1)
         k = input([i, l1, l2, get_interstitial_digits(zero, l1, l2), zero_index, pp, ee])
