@@ -58,7 +58,7 @@ def synthesize(num):
         zero_index = zero_index + 4
         i = i + 1
         print([i, l1, l2])
-        if l1 == l2 and l1 == 8:
+        if l1 == l2 and l1 % 10 == 0:
             print([i, l1, l2, equal, greater, less])
             if greater == less:
                 c = c + 1
@@ -85,9 +85,9 @@ def analyze(pivot):
             lesser = lesser + 1
         elif int(k[0]) > int(k[1]):
             greater = greater + 1
-        elif int(k[0]) == int(k[1]) and k[0] != "0":
+        elif int(k[0]) == int(k[1]) and k[0] != "8":
             equal = equal + 1
-        if k[0] == k[1] and k[0] == "0":
+        if k[0] == k[1] and k[0] == "8":
             input([equal, greater, lesser])
             equal = 0
             greater = 0
