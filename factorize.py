@@ -87,18 +87,18 @@ def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
     g.read(2)
     pp = str(f.read(pivot))[::-1]
     ee = str(g.read(pivot))
-    k = 0
-    matches = matches[::-1]
-    for zz in list(zip(ee, interstitial_digits_list[::-1], synthesis_pivots[::-1])):
-        y = input([zz[0], zz[1], zz[2][::-1], matches[k]])
-        if y == "y":
-            if zz[2][::-1][0] > zz[2][::-1][1]:
-                matches[k] = 1
-            elif zz[2][::-1][0] < zz[2][::-1][1]:
-                matches[k] = 0
-        k = k + 1
     f.close()
     g.close()
+    k = 0
+    matches = matches[::-1]
+    for zz in list(zip(pp, ee, interstitial_digits_list[::-1], synthesis_pivots[::-1])):
+        y = input([zz[1], zz[2], zz[3][::-1], matches[k]])
+        if y == "y":
+            if zz[3][::-1][0] > zz[3][::-1][1]:
+                matches[k] = 1
+            elif zz[3][::-1][0] < zz[3][::-1][1]:
+                matches[k] = 0
+        k = k + 1
     matches = matches[::-1]
     return matches
 
