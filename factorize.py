@@ -103,7 +103,7 @@ def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
 if __name__ == "__main__":
     num = str(sys.argv[1])
     zero_index, synthesis_pivots, interstitial_digits_list, matches = synthesize(num)
-    print(pivot)
+    print(zero_index)
     matches = analyze(zero_index, synthesis_pivots, interstitial_digits_list, matches)
     for x in matches:
         if x != None:
