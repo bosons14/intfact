@@ -59,11 +59,11 @@ def synthesize(num):
         i = i + 1
         print([i, l1, l2])
         if l1 == l2 and l1 % 10 == 0:
-            print([i, l1, l2, equal, greater, less])
+            input([i, l1, l2, equal, greater, less])
             if greater == less:
-                c = c + 1
-            if c == l:
-                break
+                k = input("Enter")
+                if k == '0':
+                    break
             equal = 0
             greater = 0
             less = 0
