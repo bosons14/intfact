@@ -42,31 +42,14 @@ def synthesize(num):
     sum12 = 0
     zero_index = 1
     i = 0
-    less = 0
-    greater = 0
-    equal = 0
-    c = 0
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        if l1 == l2:
-            equal = equal + 1
-        elif l1 < l2:
-            less = less + 1
-        elif l1 > l2:
-            greater = greater + 1
         zero_index = zero_index + 4
         i = i + 1
-        print([i, l1, l2])
-        if l1 == l2 and l1 % 10 == 0:
-            input([i, l1, l2, equal, greater, less])
-            if greater == less:
-                k = input("Enter")
-                if k == '0':
-                    break
-            equal = 0
-            greater = 0
-            less = 0
+        k = input([i, l1, l2])
+        if k == "0":
+            break
     return i
 
 def analyze(pivot):
