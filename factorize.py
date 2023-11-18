@@ -59,7 +59,7 @@ def synthesize(num):
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
         l2 = _synthesize_(1, num, i % l, zero)
-        synthesis_digits.append([l1, l2])
+        synthesis_pivots.append([l1, l2])
         interstitial_digits = get_interstitial_digits(zero, l1, l2)
         interstitial_digits_list.append(interstitial_digits)
         pp = f.read(1)
