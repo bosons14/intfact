@@ -52,51 +52,59 @@ def synthesize(num):
     f.read(2)
     g = open("./e.txt","r")
     g.read(2)
+    synthesis_pivots = []
+    interstitial_digits_list = []
+    matches = []
     while True:
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
         l2 = _synthesize_(1, num, i % l, zero)
+        synthesis_digits.append([l1, l2])
+        interstitial_digits = get_interstitial_digits(zero, l1, l2)
+        interstitial_digits_list.append(interstitial_digits)
         pp = f.read(1)
         ee = g.read(1)
-        k = input([i, l1, l2, get_interstitial_digits(zero, l1, l2), zero_index, pp, ee])
+        k = input([i, l1, l2, interstitial_digits, zero_index, pp, ee])
+        if k == "y" and interstitial_digits != None:
+            if l1 > l2:
+                matches.append(1)
+            elif l1 < l2:
+                matches.append(0)
+        else:
+            matches.append(None)
         if k == "y" and ee == "0": 
-            c = c + 1
-            if c == l:
-                break
+            break
         zero_index = zero_index + 1
         i = i + 1
-    return zero_index
-
-def analyze(pivot):
-    f = open("./pi.txt","r")
-    g = open("./e.txt","r")
-    f.read(2)
-    g.read(2)
-    pp = f.read(pivot)
-    ee = g.read(pivot)[::-1]
-    equal = 0
-    greater = 0
-    lesser = 0
-    for k in list(zip(pp, ee)):
-        print(k[0], k[1])
-        if int(k[0]) < int(k[1]):
-            lesser = lesser + 1
-        elif int(k[0]) > int(k[1]):
-            greater = greater + 1
-        elif int(k[0]) == int(k[1]) and k[0] != "8":
-            equal = equal + 1
-        if k[0] == k[1] and k[0] == "8":
-            input([equal, greater, lesser])
-            equal = 0
-            greater = 0
-            lesser = 0
-    input([equal, greater, lesser])
     f.close()
     g.close()
+    return zero_index, synthesis_pivots, interstitial_digits_list, matches
+
+def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
+    f = open("./pi.txt","r")
+    f.read(2)
+    g = open("./e.txt","r")
+    g.read(2)
+    pp = str(f.read(pivot))[::-1]
+    ee = str(g.read(pivot))
+    k = 0
+    for zz in list(zip(ee, interstitial_digits_list, synthesis_pivots)):
+        y = input([zz[0], zz[1], zz[2][::-1]])
+        if y == "y":
+            if zz[2][::-1][0] > zz[2][::-1][1]:
+                matches[k] = 1
+            elif zz[2][::-1][0] < zz[2][::-1][1]:
+                matches[k] = 0
+        k = k + 1
+    f.close()
+    g.close()
+    return matches
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
-    pivot = synthesize(num)
+    zero_index, synthesis_pivots, interstitial_digits_list, matches = synthesize(num)
     print(pivot)
-    print("")
-    analyze(pivot)
+    matches = analyze(zero_index, synthesis_pivots, interstitial_digits_list, matches)
+    for x in matches:
+        if x != None:
+            input(x)
