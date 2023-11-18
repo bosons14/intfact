@@ -28,28 +28,36 @@ def _synthesize_(p, num, i, zero_index):
         nn = num[i]
     else:
         nn = num[::-1][i]
-    for j in range(zero_index, zero_index + 8):
-        zero = get_zero(j)
-        for k in range(0, 8):
-            if zero[k:k + len(nn)] == nn:
-                count = count + 1
+    zero = get_zero(zero_index)
+    for k in range(0, 8):
+       if zero[k] == nn:
+            count = count + 1
     return count
 
 
 def synthesize(num):
     l = len(num)
-    sum11 = 0
-    sum12 = 0
     zero_index = 1
     i = 0
+    lesser = 0
+    greater = 0
+    g = open("./e.txt","r")
+    g.read(2)
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        zero_index = zero_index + 4
-        i = i + 1
-        k = input([i, l1, l2])
+        if l1 < l2:
+            lesser = lesser + 1
+        elif l1 > l2:
+            greater = greater + 1
+        k = input([i, l1, l2, zero_index, greater, lesser, g.read(1)])
+        if k == "1":
+            greater = 0
+            lesser = 0
+        zero_index = zero_index + 1
         if k == "0":
             break
+        i = i + 1
     return i
 
 def analyze(pivot):
