@@ -90,7 +90,7 @@ def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
     k = 0
     matches = matches[::-1]
     for zz in list(zip(ee, interstitial_digits_list[::-1], synthesis_pivots[::-1])):
-        y = input([zz[0], zz[1], zz[2][::-1]])
+        y = input([zz[0], zz[1], zz[2][::-1], matches[k]])
         if y == "y":
             if zz[2][::-1][0] > zz[2][::-1][1]:
                 matches[k] = 1
