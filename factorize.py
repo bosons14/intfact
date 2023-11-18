@@ -34,31 +34,38 @@ def _synthesize_(p, num, i, zero_index):
             count = count + 1
     return count
 
+def get_interstitial_digits(zero, l1, l2):
+    if l1 > l2:
+        t = l1
+        l1 = l2
+        l2 = t
+    delta = l2 - l1
+    if delta > 1:
+        return zero[l1:l2]
+    else:
+        return None
 
 def synthesize(num):
     l = len(num)
     zero_index = 1
     i = 0
-    lesser = 0
-    greater = 0
+    f = open("./pi.txt","r")
+    f.read(2)
     g = open("./e.txt","r")
     g.read(2)
     while True:
         l1 = _synthesize_(0, num, i % l, zero_index)
         l2 = _synthesize_(1, num, i % l, zero_index)
-        if l1 < l2:
-            lesser = lesser + 1
-        elif l1 > l2:
-            greater = greater + 1
-        k = input([i, l1, l2, zero_index, greater, lesser, g.read(1)])
-        if k == "1":
-            greater = 0
-            lesser = 0
+        pp = f.read(1)
+        ee = g.read(1)
+        k = input([i, l1, l2, get_interstitial_digits(zero, l1, l2), zero_index, pp, ee])
+        if k == "y" and ee == "0": 
+            c = c + 1
+            if c == l:
+                break
         zero_index = zero_index + 1
-        if k == "0":
-            break
         i = i + 1
-    return i
+    return zero_index
 
 def analyze(pivot):
     f = open("./pi.txt","r")
