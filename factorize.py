@@ -50,7 +50,7 @@ def synthesize(num):
     g.read(2)
     synthesis_pivots = []
     matches = []
-    c = 0
+    sum2 = 0
     while True:
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
@@ -67,10 +67,9 @@ def synthesize(num):
             elif l1 < l2:
                 matches.append(0)
                 print("match0")
-            if ee == num[c]: 
-                c = c + 1
-                if c == l:
-                    break
+            sum2 = sum2 + int(ee)
+            if sum2 % sum1 == 0: 
+                break
         else:
             matches.append(None)
             print("matchN")
