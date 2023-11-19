@@ -61,7 +61,7 @@ def synthesize(num):
         ee = g.read(1)
         if ee == "0":
             e_zero_index = e_zero_index + 1
-            e_interstitial_digits = get_interstitial_digits(get_zero(e_zero_index, l1, l2))
+            e_interstitial_digits = get_interstitial_digits(get_zero(e_zero_index), l1, l2)
         print([i, l1, l2, interstitial_digits, zero_index, pp, ee])
         if interstitial_digits != None and pp in interstitial_digits and interstitial_digits != None:
             matches.append(1)
