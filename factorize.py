@@ -66,7 +66,9 @@ def synthesize(num):
                 matches.append(0)
                 print("match0")
             if ee == "8": 
-                break
+                h = input("Break?")
+                if h == "y":
+                    break
         else:
             matches.append(None)
             print("matchN")
