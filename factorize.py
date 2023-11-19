@@ -49,6 +49,8 @@ def synthesize(num):
     g.read(2)
     synthesis_pivots = []
     matches = []
+    e_zero_index = 0
+    e_interstitial_digits = None
     while True:
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
@@ -57,15 +59,15 @@ def synthesize(num):
         interstitial_digits = get_interstitial_digits(zero, l1, l2)
         pp = f.read(1)
         ee = g.read(1)
+        if ee == "0":
+            e_zero_index = e_zero_index + 1
+            e_interstitial_digits = get_interstitial_digits(get_zero(e_zero_index, l1, l2))
         print([i, l1, l2, interstitial_digits, zero_index, pp, ee])
         if interstitial_digits != None and pp in interstitial_digits and interstitial_digits != None:
-            if l1 > l2:
-                matches.append(1)
-                print("match1")
-            elif l1 < l2:
-                matches.append(0)
-                print("match0")
-            if pp == "8" and ee == "0":
+            matches.append(1)
+            print("match1")
+            m = input(e_interstitial_digits)
+            if m == "y":
                 break
         else:
             matches.append(None)
