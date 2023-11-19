@@ -67,9 +67,9 @@ def synthesize(num):
             elif l1 < l2:
                 matches.append(0)
                 print("match0")
-            if ee == "8": 
+            if ee == num[c]: 
                 c = c + 1
-                if c == sum1:
+                if c == l:
                     break
         else:
             matches.append(None)
