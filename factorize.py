@@ -65,7 +65,7 @@ def synthesize(num):
             elif l1 < l2:
                 matches.append(0)
                 print("match0")
-            if pp == ee and pp == "0":
+            if pp == "8" and ee == "0":
                 break
         else:
             matches.append(None)
