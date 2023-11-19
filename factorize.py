@@ -34,13 +34,8 @@ def _synthesize_(p, num, i, zero):
     return count
 
 def get_interstitial_digits(zero, l1, l2):
-    if l1 > l2:
-        t = l1
-        l1 = l2
-        l2 = t
-    delta = l2 - l1
-    if delta > 1:
-        return zero[l1:l2-1]
+    if l1 > l2 and l1 - l2 > 1:
+        return zero[l2:l1-1]
     else:
         return None
 
@@ -53,7 +48,6 @@ def synthesize(num):
     g = open("./e.txt","r")
     g.read(2)
     synthesis_pivots = []
-    interstitial_digits_list = []
     matches = []
     while True:
         zero = get_zero(zero_index)
@@ -61,26 +55,28 @@ def synthesize(num):
         l2 = _synthesize_(1, num, i % l, zero)
         synthesis_pivots.append([l1, l2])
         interstitial_digits = get_interstitial_digits(zero, l1, l2)
-        interstitial_digits_list.append(interstitial_digits)
         pp = f.read(1)
         ee = g.read(1)
-        k = input([i, l1, l2, interstitial_digits, zero_index, pp, ee])
-        if k == "y" and interstitial_digits != None:
+        print([i, l1, l2, interstitial_digits, zero_index, pp, ee])
+        if interstitial_digits != None and pp in interstitial_digits and interstitial_digits != None:
             if l1 > l2:
                 matches.append(1)
+                print("match1")
             elif l1 < l2:
                 matches.append(0)
+                print("match0")
+            if ee == "8": 
+                break
         else:
             matches.append(None)
-        if k == "y" and ee == "0": 
-            break
+            print("matchN")
         zero_index = zero_index + 1
         i = i + 1
     f.close()
     g.close()
-    return zero_index, synthesis_pivots, interstitial_digits_list, matches
+    return zero_index, synthesis_pivots, matches
 
-def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
+def analyze(pivot, synthesis_pivots, matches):
     f = open("./pi.txt","r")
     f.read(2)
     g = open("./e.txt","r")
@@ -91,22 +87,32 @@ def analyze(pivot, synthesis_pivots, interstitial_digits_list, matches):
     g.close()
     k = 0
     matches = matches[::-1]
-    for zz in list(zip(pp, ee, interstitial_digits_list[::-1], synthesis_pivots[::-1])):
-        y = input([zz[0], zz[1], zz[2], zz[3][::-1], matches[k]])
-        if y == "y":
-            if zz[3][::-1][0] > zz[3][::-1][1]:
-                matches[k] = 1
-            elif zz[3][::-1][0] < zz[3][::-1][1]:
-                matches[k] = 0
+    zero_index = 1
+    for zz in list(zip(pp, ee, synthesis_pivots[::-1])):
+        zero = get_zero(zero_index)
+        interstitial_digits = get_interstitial_digits(zero, zz[2][1], zz[2][0])
+        print([zz[0], zz[1], interstitial_digits,zz[2], matches[k]])
+        zero_index = zero_index + 1
+        if zz[2] != None and zz[2][0] < zz[2][1]:
+            if interstitial_digits != None and zz[0] in interstitial_digits:
+                if matches[k] != None:
+                    input("Conflict")
+                else:
+                    matches[k] = [zz[0], zz[1], "*"]
+        else:
+            if matches[k] == None:
+                pass
+            else:
+                matches[k] = [zz[0], zz[1], "+"]
         k = k + 1
     matches = matches[::-1]
     return matches
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
-    zero_index, synthesis_pivots, interstitial_digits_list, matches = synthesize(num)
+    zero_index, synthesis_pivots, matches = synthesize(num)
     print(zero_index)
-    matches = analyze(zero_index, synthesis_pivots, interstitial_digits_list, matches)
+    matches = analyze(zero_index, synthesis_pivots, matches)
     for x in matches:
         if x != None:
-            input(x)
+            print(x)
