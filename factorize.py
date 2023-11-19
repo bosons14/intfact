@@ -41,6 +41,7 @@ def get_interstitial_digits(zero, l1, l2):
 
 def synthesize(num):
     l = len(num)
+    sum1 = sum(map(int, num))
     zero_index = 1
     i = 0
     f = open("./pi.txt","r")
@@ -68,7 +69,7 @@ def synthesize(num):
                 print("match0")
             if ee == "8": 
                 c = c + 1
-                if c == l:
+                if c == sum1:
                     break
         else:
             matches.append(None)
