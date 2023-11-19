@@ -49,6 +49,7 @@ def synthesize(num):
     g.read(2)
     synthesis_pivots = []
     matches = []
+    c = 0
     while True:
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
@@ -66,8 +67,8 @@ def synthesize(num):
                 matches.append(0)
                 print("match0")
             if ee == "8": 
-                h = input("Break?")
-                if h == "y":
+                c = c + 1
+                if c == l:
                     break
         else:
             matches.append(None)
