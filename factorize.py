@@ -41,7 +41,6 @@ def get_interstitial_digits(zero, l1, l2):
 
 def synthesize(num):
     l = len(num)
-    sum1 = sum(map(int, num))
     zero_index = 1
     i = 0
     f = open("./pi.txt","r")
@@ -50,7 +49,6 @@ def synthesize(num):
     g.read(2)
     synthesis_pivots = []
     matches = []
-    sum2 = 0
     while True:
         zero = get_zero(zero_index)
         l1 = _synthesize_(0, num, i % l, zero)
@@ -67,8 +65,7 @@ def synthesize(num):
             elif l1 < l2:
                 matches.append(0)
                 print("match0")
-            sum2 = sum2 + int(ee)
-            if sum2 % sum1 == 0: 
+            if pp == ee and pp == "0":
                 break
         else:
             matches.append(None)
