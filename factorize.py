@@ -44,7 +44,6 @@ def factorize(num):
     zero = get_zero(zero_index)
     nzeros = 0
     nones = 0
-    lower_factor = ""
     while True:
        pp = str(f.read(1))
        ee = str(g.read(1))
@@ -63,16 +62,13 @@ def factorize(num):
            ratio = None
            if nones > 0:
                ratio = (float)(nzeros / (nones*1.0))
-           input([nzeros,nones,ratio, dec])
-           if nones > 0 and nzeros > 0:
-               lower_factor = lower_factor + str(dec)
            if ratio != None and ratio == 0.5:
-               break
-           zero_index = zero_index + 1
-           zero = get_zero(zero_index)
-           pos = 0
-           nzeros = 0
-           nones = 0
+                input([nzeros,nones,ratio, dec])
+                zero_index = zero_index + 1
+                zero = get_zero(zero_index)
+                pos = 0
+                nzeros = 0
+                nones = 0
     f.close()
     g.close()
     lower_factor_dec = ""
