@@ -5,7 +5,7 @@ from mpmath import zetazero
 from primes import primes
 from zeros import zeros
 
-PREC=32
+PREC=2048
 _zeros_ = dict([])
 def get_zero(index):
     global _zeros_
