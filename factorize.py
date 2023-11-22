@@ -46,8 +46,6 @@ def factorize(num):
     nones = 0
     lower_factor = ""
     higher_factor = ""
-    first_half = 1
-    is_prime = True
     while True:
        pp = str(f.read(1))
        ee = str(g.read(1))
@@ -61,26 +59,16 @@ def factorize(num):
            nones = nones + 1
        zz = zero[pos]
        pos = pos + 1
-       input([ss, nzeros, nones, zz, nn])
+       #input([ss, nzeros, nones, zz, nn])
        if zz == nn and dec != None:
            ratio = None
            if nones > 0:
                ratio = (float)(nzeros / (nones*1.0))
-           input(ratio)
-           if ratio == 0:
+           input([nzeros,nones,ratio])
+           if nones > 0 and nzeros > 0:
+               lower_factor = lower_factor + str(dec)
+           if ratio != None and ratio == 0.5:
                break
-           if first_half == 1:
-               if nones > 0 and nzeros > 0:
-                   lower_factor = lower_factor + str(dec)
-               if ratio != None and ratio == 0.5:
-                   is_prime = False
-                   first_half = 1 - first_half
-           else:
-               if nones > 0 and nzeros > 0:
-                   higher_factor = higher_factor + str(dec)
-               if ratio != None and ratio == 0.5:
-                   is_prime = False
-                   first_half = 1 - first_half
            zero_index = zero_index + 1
            zero = get_zero(zero_index)
            pos = 0
@@ -90,13 +78,10 @@ def factorize(num):
     g.close()
     lower_factor_dec = ""
     higher_factor_dec = ""
-    if is_prime == False:
-        lower_factor_dec = int(lower_factor, 2)
-        higher_factor = higher_factor[::-1]
-        higher_factor_dec = int(higher_factor, 2)
-    return lower_factor_dec, higher_factor_dec, is_prime
+    lower_factor_dec = int(lower_factor, 2)
+    return lower_factor_dec
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
-    factor1, factor2, is_prime = factorize(num)
-    print(is_prime, factor1, factor2)
+    factor1 = factorize(num)
+    print(factor1)
