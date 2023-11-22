@@ -61,10 +61,12 @@ def factorize(num):
            nones = nones + 1
        zz = zero[pos]
        pos = pos + 1
+       input([ss, nzeros, nones, zz, nn])
        if zz == nn and dec != None:
            ratio = None
            if nones > 0:
                ratio = (float)(nzeros / (nones*1.0))
+           input(ratio)
            if ratio == 0:
                break
            if first_half == 1:
@@ -80,6 +82,7 @@ def factorize(num):
                    is_prime = False
                    first_half = 1 - first_half
            zero_index = zero_index + 1
+           zero = get_zero(zero_index)
            pos = 0
            nzeros = 0
            nones = 0
@@ -96,3 +99,4 @@ def factorize(num):
 if __name__ == "__main__":
     num = str(sys.argv[1])
     factor1, factor2, is_prime = factorize(num)
+    print(is_prime, factor1, factor2)
