@@ -5,7 +5,7 @@ from mpmath import zetazero
 from primes import primes
 from zeros import zeros
 
-PREC=2048
+PREC=1024
 _zeros_ = dict([])
 def get_zero(index):
     global _zeros_
@@ -62,13 +62,15 @@ def factorize(num):
            ratio = None
            if nones > 0:
                ratio = (float)(nzeros / (nones*1.0))
-           if ratio != None and ratio == 0.5:
-                input([nzeros,nones,ratio, dec])
-                zero_index = zero_index + 1
-                zero = get_zero(zero_index)
-                pos = 0
-                nzeros = 0
-                nones = 0
+           if ratio == 0.5:
+               input([nzeros,nones,ratio, dec])
+           else:
+               print([nzeros,nones,ratio, dec])
+           zero_index = zero_index + 1
+           zero = get_zero(zero_index)
+           pos = 0
+           nzeros = 0
+           nones = 0
     f.close()
     g.close()
     lower_factor_dec = ""
