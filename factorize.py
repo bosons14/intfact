@@ -63,7 +63,7 @@ def primality_test(num):
                ratio = (float)(nzeros / (nones*1.0))
            if ratio == 0.5:
                return True
-           elif ratio >= 0.6:
+           elif ratio >= 2.0:
                return False
            zero_index = zero_index + 1
            zero = get_zero(zero_index)
