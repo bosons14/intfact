@@ -31,7 +31,7 @@ def decide(ss):
        dec = None
     return dec
 
-def factorize(num):
+def primality_test(num):
     f = open("./pi.txt","r")
     f.read(2)
     g = open("./e.txt","r")
@@ -57,28 +57,21 @@ def factorize(num):
            nones = nones + 1
        zz = zero[pos]
        pos = pos + 1
-       #input([ss, nzeros, nones, zz, nn])
        if zz == nn and dec != None:
            ratio = None
            if nones > 0:
                ratio = (float)(nzeros / (nones*1.0))
            if ratio == 0.5:
-               input([nzeros,nones,ratio, dec])
-           else:
-               print([nzeros,nones,ratio, dec])
+               return True
+           elif ratio >= 0.6:
+               return False
            zero_index = zero_index + 1
            zero = get_zero(zero_index)
            pos = 0
-           nzeros = 0
-           nones = 0
     f.close()
     g.close()
-    lower_factor_dec = ""
-    higher_factor_dec = ""
-    lower_factor_dec = int(lower_factor, 2)
-    return lower_factor_dec
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
-    factor1 = factorize(num)
-    print(factor1)
+    is_prime = primality_test(num)
+    print(is_prime)
